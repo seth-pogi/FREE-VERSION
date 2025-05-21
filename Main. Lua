@@ -31,7 +31,7 @@ end
 setupAntiAFK()
 
 -- Create Main Window
-local window = library:AddWindow("PUBLIC SCRIPT BY SETH BNS", {
+local window = library:AddWindow("😎FREE VERSION SCRIPT BY SETH POGI😜", {
     main_color = Color3.fromRGB(15, 80, 160),
     min_size = Vector2.new(400, 382),
     can_resize = true,
@@ -42,7 +42,7 @@ local mainTab = window:AddTab("Main")
 local farmPlusTab = window:AddTab("Farm")
 mainTab:Show() -- Show this tab by default
 
-mainTab:AddLabel("VOID SQUAD ON TOP")
+mainTab:AddLabel("☠️VOID SQUAD ON TOP☠️")
 
 
 -- Add Anti-AFK toggle
@@ -592,62 +592,6 @@ rebirthsFolder:AddTextBox("Rebirth Target", function(text)
     end
 end)
 
--- Create toggle switches
-local infiniteSwitch -- Forward declaration
-
-local targetSwitch = rebirthsFolder:AddSwitch("Auto Rebirth Target", function(bool)
-    _G.targetRebirthActive = bool
-    
-    if bool then
-        -- Turn off infinite rebirth if it's on
-        if _G.infiniteRebirthActive and infiniteSwitch then
-            infiniteSwitch:Set(false)
-            _G.infiniteRebirthActive = false
-        end
-        
-        -- Start target rebirth loop
-        spawn(function()
-            while _G.targetRebirthActive and wait(0.1) do
-                local currentRebirths = game.Players.LocalPlayer.leaderstats.Rebirths.Value
-                
-                if currentRebirths >= targetRebirthValue then
-                    targetSwitch:Set(false)
-                    _G.targetRebirthActive = false
-                    
-                    game:GetService("StarterGui"):SetCore("SendNotification", {
-                        Title = "Goal Achieved!!",
-                        Text = "You have reached " .. tostring(targetRebirthValue) .. " rebirth",
-                        Duration = 5
-                    })
-                    
-                    break
-                end
-                
-                game:GetService("ReplicatedStorage").rEvents.rebirthRemote:InvokeServer("rebirthRequest")
-            end
-        end)
-    end
-end, "Automatic rebirth until the goal is reached")
-
-infiniteSwitch = rebirthsFolder:AddSwitch("Auto Rebirth (Infinite)", function(bool)
-    _G.infiniteRebirthActive = bool
-    
-    if bool then
-        -- Turn off target rebirth if it's on
-        if _G.targetRebirthActive and targetSwitch then
-            targetSwitch:Set(false)
-            _G.targetRebirthActive = false
-        end
-        
-        -- Start infinite rebirth loop
-        spawn(function()
-            while _G.infiniteRebirthActive and wait(0.1) do
-                game:GetService("ReplicatedStorage").rEvents.rebirthRemote:InvokeServer("rebirthRequest")
-            end
-        end)
-    end
-end, "Rebirth continuously")
-
 local sizeSwitch = rebirthsFolder:AddSwitch("Auto Size 1", function(bool)
     _G.autoSizeActive = bool
     
@@ -675,18 +619,6 @@ local teleportSwitch = rebirthsFolder:AddSwitch("Auto Teleport to Muscle King", 
 end, "Continuous teleportation to Muscle King")
 
 local autoEquipToolsFolder = farmPlusTab:AddFolder("Auto Equip Tools")
-
--- Free AutoLift Gamepass Button
-autoEquipToolsFolder:AddButton("Gamepass AutoLift", function()
-    local gamepassFolder = game:GetService("ReplicatedStorage").gamepassIds
-    local player = game:GetService("Players").LocalPlayer
-    for _, gamepass in pairs(gamepassFolder:GetChildren()) do
-        local value = Instance.new("IntValue")
-        value.Name = gamepass.Name
-        value.Value = gamepass.Value
-        value.Parent = player.ownedGamepasses
-    end
-end, "Unlock the AutoLift Game Pass for free")
 
 -- Auto Weight Toggle
 autoEquipToolsFolder:AddSwitch("Auto Weight", function(Value)
@@ -1194,20 +1126,6 @@ misc1Folder:AddSwitch("Walk on Water", function(bool)
         makePartsWalkthrough()
     end
 end)
-
--- Add Auto Spin Wheel toggle
-misc1Folder:AddSwitch("Auto Spin Wheel", function(bool)
-    _G.AutoSpinWheel = bool
-    
-    if bool then
-        spawn(function()
-            while _G.AutoSpinWheel and wait(1) do
-                game:GetService("ReplicatedStorage").rEvents.openFortuneWheelRemote:InvokeServer("openFortuneWheel", game:GetService("ReplicatedStorage").fortuneWheelChances["Fortune Wheel"])
-            end
-        end)
-    end
-end)
-
 
 -- Create the second folder
 
