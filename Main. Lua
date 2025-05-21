@@ -31,7 +31,7 @@ end
 setupAntiAFK()
 
 -- Create Main Window
-local window = library:AddWindow("50kg x Autokill Script", {
+local window = library:AddWindow("PUBLIC SCRIPT BY SETH BNS", {
     main_color = Color3.fromRGB(15, 80, 160),
     min_size = Vector2.new(400, 382),
     can_resize = true,
@@ -42,7 +42,7 @@ local mainTab = window:AddTab("Main")
 local farmPlusTab = window:AddTab("Farm")
 mainTab:Show() -- Show this tab by default
 
-mainTab:AddLabel("50kg on top")
+mainTab:AddLabel("VOID SQUAD ON TOP")
 
 
 -- Add Anti-AFK toggle
